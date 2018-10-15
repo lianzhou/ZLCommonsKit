@@ -1,6 +1,6 @@
 //
 //  JZSystemMacrocDefine.h
-//  eStudy
+//  ZLCommonsKit
 //
 //  Created by zhoulian on 17/6/9.
 //

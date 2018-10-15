@@ -1,12 +1,11 @@
 //
 //  JZProvinceModel.m
-//  eStudy
+//  ZLCommonsKit
 //
 //         我有一壶酒,足以慰风尘
 //         倾倒江海里,共饮天下人
 //
-//  Created by wangjingfei on 2017/8/16.
-//  Copyright © 2017年 苏州橘子网络科技股份有限公司. All rights reserved.
+//  Created by zhoulian on 2017/8/16.
 //
 
 

@@ -1,6 +1,6 @@
 //
 //  JZNetWorkCenterCondition.h
-//  eStudy
+//  ZLCommonsKit
 //
 //         我有一壶酒,足以慰风尘
 //         倾倒江海里,共饮天下人
@@ -15,7 +15,7 @@
 @interface JZNetWorkCenterCondition : NSObject
 
 /*! @brief *
- * 请求任务类型, 默认是 橘子网络的请求
+ * 请求任务类型, 默认是 网络的请求
  */
 @property (nonatomic,assign) JZNetworkRequestType requestType;
 

@@ -1,6 +1,6 @@
 //
 //  JZStringUitil.m
-//  eStudy
+//  ZLCommonsKit
 //
 //         我有一壶酒,足以慰风尘
 //         倾倒江海里,共饮天下人
