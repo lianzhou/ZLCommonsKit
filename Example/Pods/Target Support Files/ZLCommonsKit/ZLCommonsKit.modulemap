@@ -1,0 +1,6 @@
+framework module ZLCommonsKit {
+  umbrella header "ZLCommonsKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

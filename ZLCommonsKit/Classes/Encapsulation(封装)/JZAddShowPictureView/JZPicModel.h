@@ -1,0 +1,22 @@
+//
+//  JZPicModel.h
+//  eStudy
+//
+//         我有一壶酒,足以慰风尘
+//         倾倒江海里,共饮天下人
+//
+//  Created by 马金丽 on 17/7/4.
+//  Copyright © 2017年 苏州橘子网络科技股份有限公司. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface JZPicModel : NSObject
+
+@property(nonatomic,copy)NSString *picType; //0:照片 1:视频
+@property(nonatomic,strong)UIImage *image;
+@property(nonatomic,copy)NSString *imageUrl;
+@property(nonatomic,assign)BOOL isShowPicNum;
+@property(nonatomic,assign)NSInteger picNum;
+@property(nonatomic,assign)CGFloat itemWidth;
+@end

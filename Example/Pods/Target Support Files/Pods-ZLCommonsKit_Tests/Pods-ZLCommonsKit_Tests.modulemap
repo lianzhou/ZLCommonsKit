@@ -1,0 +1,6 @@
+framework module Pods_ZLCommonsKit_Tests {
+  umbrella header "Pods-ZLCommonsKit_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
