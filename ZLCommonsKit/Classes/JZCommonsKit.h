@@ -54,7 +54,7 @@ FOUNDATION_EXPORT const unsigned char JZCommonsKitVersionString[];
 #import "Aspects.h"
 #import "CocoaLumberjack.h"
 #import "IQKeyboardManager.h"
-#import "JPUSHService.h"
+//#import "JPUSHService.h"
 
 /*************类别************/
 #import "UITableViewCell+LineImageView.h"
@@ -80,7 +80,7 @@ FOUNDATION_EXPORT const unsigned char JZCommonsKitVersionString[];
 #import "AYBubbleView.h"
 #import "SDWebImageManager.h"
 #import "ALActionSheetView.h"
-#import "FSCalendar.h"
+//#import "FSCalendar.h"
 #import "HPGrowingTextView.h"
  
 

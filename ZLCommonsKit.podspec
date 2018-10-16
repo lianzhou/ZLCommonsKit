@@ -46,12 +46,15 @@ s.dependency  'FMDB', '~> 2.7.2'
 s.dependency  'DZNEmptyDataSet', '~> 1.7.3'
 s.dependency  'YYKit', '~> 1.0.9'
 s.dependency  'Masonry', '~> 0.6.4'
-s.dependency  'MBProgressHUD', '~> 0.9.2'
+s.dependency  'MBProgressHUD'
 s.dependency  'IQKeyboardManager', '~> 3.3.7'
 s.dependency  'MJExtension', '~> 3.0.10'
 s.dependency  'MJRefresh', '~> 3.1.0'
+#ENImagePickerController 需要
+s.dependency  'GPUImage', '~> 0.1.7'
+s.dependency  'TOCropViewController'
 
-
+s.dependency 'DTCoreText'
 
 
 

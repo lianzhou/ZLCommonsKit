@@ -127,7 +127,7 @@
     if (networkTask.requestHeaders.count >0) {
         
         [networkTask.requestHeaders enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            [_manager.requestSerializer setValue:obj forHTTPHeaderField:key];
+            [self->_manager.requestSerializer setValue:obj forHTTPHeaderField:key];
         }];
     }else{
 ////        [_manager.requestSerializer removeHTTPHeaderField:@"AccessToken"];
