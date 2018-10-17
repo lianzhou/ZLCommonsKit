@@ -1,6 +1,6 @@
 //
 //  ENImageVideoCameraViewController.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/10.
 //  Copyright © 2017年 李长恩. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import "ENImageVideoCameraViewController.h"
 #import "ENAVPlayerView.h"
-#import "JZFilePath.h"
-#import "JZDataHandler.h"
-#import "JZStringMacrocDefine.h"
+#import "ZLFilePath.h"
+#import "ZLDataHandler.h"
+#import "ZLStringMacrocDefine.h"
 #import <CoreMotion/CoreMotion.h>
-#import "UIImage+JZTintColor.h"
+#import "UIImage+ZLTintColor.h"
 
 
 @interface ENImageVideoCameraViewController ()
@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    磨皮/Users/wangwangming/Desktop/Project/JZCommonsKit/JZCommonsKit/Classes/Encapsulation(封装)/JZAlertHUD
+//    磨皮/Users/wangwangming/Desktop/Project/ZLCommonsKit/ZLCommonsKit/Classes/Encapsulation(封装)/ZLAlertHUD
     GPUImageBilateralFilter *bilateralFilter = [[GPUImageBilateralFilter alloc] init];
     bilateralFilter.distanceNormalizationFactor = 10.0f;
 //    美白
@@ -189,7 +189,7 @@
 - (void)stopRecordingWithCompletionHandler:(void (^)(void))handler {
     [self.movieWriter finishRecordingWithCompletionHandler:^{
         NSString * moviePath = [self.moviePath path];
-        if (!JZStringIsNull(moviePath)) {
+        if (!ZLStringIsNull(moviePath)) {
             self.cameraModel = nil;
             [self.movieWriter.assetWriter.inputs enumerateObjectsUsingBlock:^(AVAssetWriterInput * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (obj.mediaType == AVMediaTypeVideo) {
@@ -322,9 +322,9 @@
 #pragma mark - 视频播放
 - (NSURL *)documentMovieURL:(BOOL)isRemove{
     NSString * moviePath = [self.moviePath path];
-    if (!JZStringIsNull(moviePath)) {
+    if (!ZLStringIsNull(moviePath)) {
         if(isRemove){
-            [JZFilePath removeDocumentDirectoryPath:moviePath];
+            [ZLFilePath removeDocumentDirectoryPath:moviePath];
 //            NSError * err;
 //            [[NSFileManager defaultManager] removeItemAtURL:self.moviePath error:&err];
 //            if (err) {
@@ -333,11 +333,11 @@
         }
         return self.moviePath;
     }
-    NSString *mainIMImageCacheDirectory = [JZFilePath mainIMImageCacheDirectory];
+    NSString *mainIMImageCacheDirectory = [ZLFilePath mainIMImageCacheDirectory];
     
-    [JZFilePath creatPathWithFilePath:mainIMImageCacheDirectory type:JZLocalFilePathTypeTemporary];
+    [ZLFilePath creatPathWithFilePath:mainIMImageCacheDirectory type:ZLLocalFilePathTypeTemporary];
 
-    NSString *pathMovie =[mainIMImageCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[JZDataHandler currentTimeString]]];
+    NSString *pathMovie =[mainIMImageCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[ZLDataHandler currentTimeString]]];
     NSURL *movieURL = [NSURL fileURLWithPath:pathMovie];
     self.moviePath = movieURL;
     return movieURL;

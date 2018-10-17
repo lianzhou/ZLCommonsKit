@@ -8,7 +8,7 @@
 
 #import "LimitInput.h"
 #import <objc/runtime.h>
-#import "JZStringMacrocDefine.h"
+#import "ZLStringMacrocDefine.h"
 
 
 #define RUNTIME_ADD_PROPERTY(propertyName)      \
@@ -83,7 +83,7 @@ IMPLEMENT_PROPERTY(UITextView)
                 
                 textField.textField_isMore = [NSNumber numberWithBool:YES];
                 
-                if (JZStringIsContainsEmoji(textField.text)) {
+                if (ZLStringIsContainsEmoji(textField.text)) {
                     if (toBeString.length>textField.textField_tempText.length) {
                         textField.text=textField.textField_tempText;
                     }else{
@@ -91,7 +91,7 @@ IMPLEMENT_PROPERTY(UITextView)
                         textField.textField_tempText = @"";
                     }
                 }else{
-                    if (JZStringIsContainsEmoji(textField.text)) {
+                    if (ZLStringIsContainsEmoji(textField.text)) {
                         if (toBeString.length>textField.textField_tempText.length) {
                             textField.text=textField.textField_tempText;
                         }else{
@@ -104,7 +104,7 @@ IMPLEMENT_PROPERTY(UITextView)
                 }
             }else if (toBeString.length == [number integerValue]){
                 textField.textField_isMore = [NSNumber numberWithBool:NO];
-                if (JZStringIsContainsEmoji(textField.text)) {
+                if (ZLStringIsContainsEmoji(textField.text)) {
                     if (toBeString.length>textField.textField_tempText.length) {
                         textField.text=textField.textField_tempText;
                     }else{
@@ -116,16 +116,16 @@ IMPLEMENT_PROPERTY(UITextView)
                 }
             } else {
                 //            if ([number integerValue] > 20) {
-                //                [JZAlertHUD autoShowMessage:@"已达到字数上限"];
+                //                [ZLAlertHUD autoShowMessage:@"已达到字数上限"];
                 //            }
                 
-                if ( [textField.textField_isMore boolValue] || JZStringIsNull(textField.text)) {
+                if ( [textField.textField_isMore boolValue] || ZLStringIsNull(textField.text)) {
                     textField.text = [toBeString substringToIndex:[number integerValue]];
                     textField.textField_isMore = [NSNumber numberWithBool:NO];
                 }else{
                     textField.text =  textField.textField_tempText;
                 }
-                if (JZStringIsContainsEmoji(textField.text)) {
+                if (ZLStringIsContainsEmoji(textField.text)) {
                     if (toBeString.length>textField.textField_tempText.length) {
                         textField.text=textField.textField_tempText;
                     }else{
@@ -133,7 +133,7 @@ IMPLEMENT_PROPERTY(UITextView)
                         textField.textField_tempText = @"";
                     }
                 }else{
-                    if (JZStringIsContainsEmoji(textField.text)) {
+                    if (ZLStringIsContainsEmoji(textField.text)) {
                         if (toBeString.length>textField.textField_tempText.length) {
                             textField.text=textField.textField_tempText;
                         }else{
@@ -148,9 +148,9 @@ IMPLEMENT_PROPERTY(UITextView)
             
         }
     }
-    if (textField.delegate && [textField.delegate respondsToSelector:@selector(jz_textFieldViewDidChange:)]) {
-        id <JZTextFieldDelegate> delegate = (id <JZTextFieldDelegate>)textField.delegate;
-        [delegate jz_textFieldViewDidChange:textField];
+    if (textField.delegate && [textField.delegate respondsToSelector:@selector(zl_textFieldViewDidChange:)]) {
+        id <ZLTextFieldDelegate> delegate = (id <ZLTextFieldDelegate>)textField.delegate;
+        [delegate zl_textFieldViewDidChange:textField];
     }
     
 }
@@ -173,7 +173,7 @@ IMPLEMENT_PROPERTY(UITextView)
             
             if (toBeString.length < [number integerValue] ) {
                 textView.textView_isMore = [NSNumber numberWithBool:YES];
-                if (JZStringIsContainsEmoji(textView.text)) {
+                if (ZLStringIsContainsEmoji(textView.text)) {
                     if (toBeString.length>textView.textView_tempText.length) {
                         textView.text=textView.textView_tempText;
                     }else{
@@ -186,7 +186,7 @@ IMPLEMENT_PROPERTY(UITextView)
             }else if (toBeString.length == [number integerValue]){
                 textView.textView_isMore = [NSNumber numberWithBool:NO];
                 
-                if (JZStringIsContainsEmoji(textView.text)) {
+                if (ZLStringIsContainsEmoji(textView.text)) {
                     if (toBeString.length>textView.textView_tempText.length) {
                         textView.text=textView.textView_tempText;
                     }else{
@@ -199,7 +199,7 @@ IMPLEMENT_PROPERTY(UITextView)
                 }
             }else {
                 
-                if ( [textView.textView_isMore boolValue] || JZStringIsNull(textView.text)) {
+                if ( [textView.textView_isMore boolValue] || ZLStringIsNull(textView.text)) {
                     
                     NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:[number integerValue]];
                     if (rangeIndex.length == 1){
@@ -214,7 +214,7 @@ IMPLEMENT_PROPERTY(UITextView)
                     textView.text =  textView.textView_tempText;
                 }
                 
-                if (JZStringIsContainsEmoji(textView.text)) {
+                if (ZLStringIsContainsEmoji(textView.text)) {
                     if (toBeString.length>textView.textView_tempText.length) {
                         textView.text=textView.textView_tempText;
                     }else{
@@ -228,9 +228,9 @@ IMPLEMENT_PROPERTY(UITextView)
         }
         
     }
-    if (textView.delegate && [textView.delegate respondsToSelector:@selector(jz_textViewDidChange:)]) {
-        id <JZTextViewDelegate> delegate = (id <JZTextViewDelegate>)textView.delegate;
-        [delegate jz_textViewDidChange:textView];
+    if (textView.delegate && [textView.delegate respondsToSelector:@selector(ZL_textViewDidChange:)]) {
+        id <ZLTextViewDelegate> delegate = (id <ZLTextViewDelegate>)textView.delegate;
+        [delegate zl_textViewDidChange:textView];
     }
 
 }
@@ -242,18 +242,18 @@ IMPLEMENT_PROPERTY(UITextView)
 
 
 
-static const char *JZTextField_textField_isMore = "JZTextField_textField_isMore";
-static const char *JZTextField_textField_tempText = "JZTextField_textField_tempText";
+static const char *ZLTextField_textField_isMore = "ZLTextField_textField_isMore";
+static const char *ZLTextField_textField_tempText = "ZLTextField_textField_tempText";
 
-@implementation UITextField (JZTextField)
+@implementation UITextField (ZLTextField)
 
 
 - (void)setTextField_isMore:(NSNumber *)textField_isMore{
-    objc_setAssociatedObject(self, JZTextField_textField_isMore, textField_isMore, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, ZLTextField_textField_isMore, textField_isMore, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
 }
 - (NSNumber *)textField_isMore{
-    NSNumber * textField_isMoreNumber = objc_getAssociatedObject(self, JZTextField_textField_isMore);
+    NSNumber * textField_isMoreNumber = objc_getAssociatedObject(self, ZLTextField_textField_isMore);
     if (textField_isMoreNumber  == nil) {
         return [NSNumber numberWithBool:YES];
     }
@@ -261,11 +261,11 @@ static const char *JZTextField_textField_tempText = "JZTextField_textField_tempT
 }
 
 - (void)setTextField_tempText:(NSString *)textField_tempText{
-    objc_setAssociatedObject(self, JZTextField_textField_tempText, textField_tempText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, ZLTextField_textField_tempText, textField_tempText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
 }
 - (NSString *)textField_tempText{
-    NSString * textField_tempText = objc_getAssociatedObject(self, JZTextField_textField_tempText);
+    NSString * textField_tempText = objc_getAssociatedObject(self, ZLTextField_textField_tempText);
     
     return textField_tempText;
 }
@@ -275,18 +275,18 @@ static const char *JZTextField_textField_tempText = "JZTextField_textField_tempT
 
 
 
-static const char *JZTextView_textField_isMore = "JZTextView_textField_isMore";
-static const char *JZTextView_textField_tempText = "JZTextView_textField_tempText";
+static const char *ZLTextView_textField_isMore = "ZLTextView_textField_isMore";
+static const char *ZLTextView_textField_tempText = "ZLTextView_textField_tempText";
 
-@implementation UITextView (JZTextView)
+@implementation UITextView (ZLTextView)
 
 
 - (void)setTextView_isMore:(NSNumber *)textView_isMore{
-    objc_setAssociatedObject(self, JZTextView_textField_isMore, textView_isMore, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, ZLTextView_textField_isMore, textView_isMore, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
 }
 - (NSNumber *)textView_isMore{
-    NSNumber * textView_isMore = objc_getAssociatedObject(self, JZTextView_textField_isMore);
+    NSNumber * textView_isMore = objc_getAssociatedObject(self, ZLTextView_textField_isMore);
     if (textView_isMore  == nil) {
         return [NSNumber numberWithBool:YES];
     }
@@ -294,11 +294,11 @@ static const char *JZTextView_textField_tempText = "JZTextView_textField_tempTex
 }
 
 - (void)setTextView_tempText:(NSString *)textView_tempText{
-    objc_setAssociatedObject(self, JZTextView_textField_tempText, textView_tempText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, ZLTextView_textField_tempText, textView_tempText, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
 }
 - (NSString *)textView_tempText{
-    NSString * textView_tempText = objc_getAssociatedObject(self, JZTextView_textField_tempText);
+    NSString * textView_tempText = objc_getAssociatedObject(self, ZLTextView_textField_tempText);
     
     return textView_tempText;
 }

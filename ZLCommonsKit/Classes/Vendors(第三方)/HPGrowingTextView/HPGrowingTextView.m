@@ -27,9 +27,9 @@
 
 #import "HPGrowingTextView.h"
 #import "HPTextViewInternal.h"
-#import "JZSystemMacrocDefine.h"
-#import "JZEmojiHelper.h"
-#import "JZStringMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
+#import "ZLEmojiHelper.h"
+#import "ZLStringMacrocDefine.h"
 #import <LimitInput.h>
 
 @interface HPGrowingTextView(private)
@@ -675,7 +675,7 @@
 }
 
 - (BOOL)textViewDidDeleteBackward:(UITextView *)textView {
-    if(JZStringIsNull(internalTextView.text))
+    if(ZLStringIsNull(internalTextView.text))
     {
         return YES;
     }
@@ -707,7 +707,7 @@
         if (innerCharCount > 8) {
             return YES;
         }else{
-            NSDictionary * emojiDictionary = [JZEmojiHelper emojiTextDict];
+            NSDictionary * emojiDictionary = [ZLEmojiHelper emojiTextDict];
             NSString * emojiString = [internalTextView.text substringWithRange:NSMakeRange(selectedRange.location-innerCharCount-1, innerCharCount+1)];
             if ([emojiDictionary.allKeys containsObject:emojiString]) {
                 internalTextView.text = [internalTextView.text stringByReplacingCharactersInRange:NSMakeRange(selectedRange.location-innerCharCount-1, innerCharCount+1) withString:@""];
@@ -719,7 +719,7 @@
             
         }
         return NO;
-    }else if ([substring isEqualToString:JZ_IM_REMIND]){
+    }else if ([substring isEqualToString:ZL_IM_REMIND]){
         
         NSInteger lastCharCursor = (selectedRange.location-1);
         NSInteger innerCharCount = 0;

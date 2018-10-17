@@ -1,6 +1,6 @@
 //
 //  ENPhotoLibraryManager.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/2.
 //  Copyright © 2017年 李长恩. All rights reserved.
@@ -10,10 +10,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import <Photos/Photos.h>
-#import "JZSystemMacrocDefine.h"
-#import "JZStringMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
+#import "ZLStringMacrocDefine.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "JZDataHandler.h"
+#import "ZLDataHandler.h"
 
 @interface ENPhotoLibraryManager ()
 
@@ -275,7 +275,7 @@
         CGSize imageSize;
   
         CGFloat aspectRatio = phAsset.pixelWidth / (CGFloat)phAsset.pixelHeight;
-        if (JZ_IPHONE_X) {
+        if (ZL_IPHONE_X) {
             imageSize = CGSizeMake(photoWidth / 1.5, photoWidth / 1.5 * aspectRatio);
         }else{
             imageSize = CGSizeMake(photoWidth, photoWidth * aspectRatio);
@@ -520,7 +520,7 @@
 }
 - (void)savePhotoWithImageData:(NSData *)data GIF:(BOOL)gif location:(CLLocation *)location completion:(void (^)(ENAssetModel * assetModel))completion failure:(void (^)(NSString *error))failure {
     
-    [JZSystemUtils assetsAuthorizationStatusAuthorized:^{
+    [ZLSystemUtils assetsAuthorizationStatusAuthorized:^{
         
         if (iOS9Later) {
             __block NSString *localIdentifier;
@@ -562,7 +562,7 @@
                         });
                     }
                 }else {
-                    if (JZStringIsNull(error.localizedDescription)) {
+                    if (ZLStringIsNull(error.localizedDescription)) {
                         if (failure) {
                             dispatch_async_on_main_queue(^{
                                 failure(@"未知原因,保存失败");
@@ -748,9 +748,9 @@
     }
 }
 - (NSURL *)documentMovieURL{
-    NSString *mainIMImageCacheDirectory = [JZFilePath mainIMImageCacheDirectory];
-    [JZFilePath creatPathWithFilePath:mainIMImageCacheDirectory type:JZLocalFilePathTypeTemporary];
-    NSString *pathMovie =[mainIMImageCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[JZDataHandler currentTimeString]]];
+    NSString *mainIMImageCacheDirectory = [ZLFilePath mainIMImageCacheDirectory];
+    [ZLFilePath creatPathWithFilePath:mainIMImageCacheDirectory type:ZLLocalFilePathTypeTemporary];
+    NSString *pathMovie =[mainIMImageCacheDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.mp4",[ZLDataHandler currentTimeString]]];
     NSURL *movieURL = [NSURL fileURLWithPath:pathMovie];
     return movieURL;
 }

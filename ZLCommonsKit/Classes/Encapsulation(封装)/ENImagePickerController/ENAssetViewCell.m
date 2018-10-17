@@ -1,6 +1,6 @@
 //
 //  ENAssetViewCell.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/1.
 //  Copyright © 2017年 李长恩. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "ENAssetViewCell.h"
 #import "UIImage+Picker.h"
-#import "JZDataHandler.h"
+#import "ZLDataHandler.h"
 
 @interface ENAssetViewCell ()
 
@@ -106,7 +106,7 @@
     } progressHandler:nil networkAccessAllowed:NO];
     
     if ((assetModel.type ==  ENAssetModelMediaTypeVideo) && (assetModel.duration !=0)) {
-        self.timeLabel.text = [JZDataHandler hourMinuteTimeFromSecond:[NSString stringWithFormat:@"%d",assetModel.duration]];
+        self.timeLabel.text = [ZLDataHandler hourMinuteTimeFromSecond:[NSString stringWithFormat:@"%d",assetModel.duration]];
         self.timeLabel.hidden = NO;
     }else{
         self.timeLabel.hidden = YES;

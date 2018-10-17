@@ -12,10 +12,10 @@
 #import "PBPresentAnimatedTransitioningController.h"
 #import "ALActionSheetView.h"
 #import "ENPhotoLibraryManager.h"
-#import "JZAlertHUD.h"
+#import "ZLAlertHUD.h"
 #import <SDWebImage/SDWebImageManager.h>
-#import "JZContext.h"
-#import "JZSystemUtils.h"
+#import "ZLContext.h"
+#import "ZLSystemUtils.h"
 #import "Masonry.h"
 
 static const NSUInteger reusable_page_count = 3;
@@ -80,7 +80,7 @@ static const NSUInteger reusable_page_count = 3;
     self.pb_select = NO;
     self.photoDictionaryM = [@{} mutableCopy];
     
-    [JZContext shareInstance].currentViewController = self;
+    [ZLContext shareInstance].currentViewController = self;
     return self;
 }
 
@@ -196,7 +196,7 @@ static const NSUInteger reusable_page_count = 3;
     NSString *indicatorText = [NSString stringWithFormat:@"%@/%@", @(self.currentPage + 1), @(self.numberOfPages)];
     self.indicatorLabel.text = indicatorText;
     [self.indicatorLabel sizeToFit];
-    if ([JZSystemUtils iPhoneXDevice]) {
+    if ([ZLSystemUtils iPhoneXDevice]) {
         self.indicatorLabel.center = CGPointMake(CGRectGetWidth(self.view.bounds) / 2.0f,
                                                   44);
     }else {
@@ -295,9 +295,9 @@ static const NSUInteger reusable_page_count = 3;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (photo.underlyingImage) {
             [photoLibraryManager savePhotoWithImage:photo.underlyingImage completion:^(ENAssetModel *assetModel) {
-                [JZAlertHUD showTipTitle:@"保存成功"];
+                [ZLAlertHUD showTipTitle:@"保存成功"];
             } failure:^(NSString *error) {
-                [JZAlertHUD showTipTitle:error];
+                [ZLAlertHUD showTipTitle:error];
             }];
         }else if(photo.photoURL){
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -305,9 +305,9 @@ static const NSUInteger reusable_page_count = 3;
                 
             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                 [photoLibraryManager savePhotoWithImage:image completion:^(ENAssetModel *assetModel) {
-                    [JZAlertHUD showTipTitle:@"保存成功"];
+                    [ZLAlertHUD showTipTitle:@"保存成功"];
                 } failure:^(NSString *error) {
-                    [JZAlertHUD showTipTitle:error];
+                    [ZLAlertHUD showTipTitle:error];
                 }];
             }];
         }
@@ -580,7 +580,7 @@ static const NSUInteger reusable_page_count = 3;
 - (void)_didDismiss {
     self.currentScrollViewController.imageScrollView.imageView.layer.anchorPoint = CGPointMake(0.5, 0);
     self.currentThumbView.hidden = NO;
-    [JZContext shareInstance].currentViewController = self.presentingViewController;
+    [ZLContext shareInstance].currentViewController = self.presentingViewController;
 }
 
 - (void)_hideIndicator {
@@ -700,7 +700,7 @@ static const NSUInteger reusable_page_count = 3;
     return _reusableImageScrollerViewControllers;
 }
 - (void)downLoadOriginalImage:(UIButton *)sender {
-    [JZAlertHUD showHUDTitle:@"" toView:self.view];
+    [ZLAlertHUD showHUDTitle:@"" toView:self.view];
     
     ENPhoto * photo = [self photoForPageAtIndex:self.currentPage];
     photo.isDownLoad = YES;
@@ -729,7 +729,7 @@ static const NSUInteger reusable_page_count = 3;
     
     
     
-    [JZAlertHUD hideHUD:self.view];
+    [ZLAlertHUD hideHUD:self.view];
 }
 - (UILabel *)indicatorLabel {
     if (!_indicatorLabel) {

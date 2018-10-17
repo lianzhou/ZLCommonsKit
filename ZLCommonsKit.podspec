@@ -31,11 +31,11 @@ s.ios.deployment_target = '8.0'
 s.source_files = 'ZLCommonsKit/Classes/**/*'
 
 s.resource_bundles = {
-'JZEmojiExpression' => ['ZLCommonsKit/Assets/JZEmojiExpression/**/*'],
+'ZLEmojiExpression' => ['ZLCommonsKit/Assets/ZLEmojiExpression/**/*'],
 
 'ENImagePickerExpression' => ['ZLCommonsKit/Assets/ENImagePickerExpression/**/*'],
 
-'JZPlaceholderExp' => ['ZLCommonsKit/Assets/JZPlaceholderExp/**/*']
+'ZLPlaceholderExp' => ['ZLCommonsKit/Assets/ZLPlaceholderExp/**/*']
 }
 
 # s.public_header_files = 'Pod/Classes/**/*.h'

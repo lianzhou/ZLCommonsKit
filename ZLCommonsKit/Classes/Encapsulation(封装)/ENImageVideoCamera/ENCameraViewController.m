@@ -1,6 +1,6 @@
 //
 //  ENCameraViewController.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/10.
 //  Copyright © 2017年 李长恩. All rights reserved.
@@ -10,13 +10,13 @@
 #import <Masonry/Masonry.h>
 #import "ENProgressView.h"
 #import "UIImage+Picker.h"
-#import "JZAlertHUD.h"
+#import "ZLAlertHUD.h"
 #import "ENPhotoLibraryManager.h"
-#import "JZSystemUtils.h"
-#import "JZSystemMacrocDefine.h"
-#import "JZBaseNavigationController.h"
-#import "JZBaseTabBarController.h"
-#import "UIImage+JZTintColor.h"
+#import "ZLSystemUtils.h"
+#import "ZLSystemMacrocDefine.h"
+#import "ZLBaseNavigationController.h"
+#import "ZLBaseTabBarController.h"
+#import "UIImage+ZLTintColor.h"
 
 @interface ENCameraViewController ()<UIGestureRecognizerDelegate>
 
@@ -71,7 +71,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
  
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissViewControllerCompletion) name:@"JZNotificationTypeWillLogInOut" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissViewControllerCompletion) name:@"ZLNotificationTypeWillLogInOut" object:nil];
 
 //    [self.view addSubview:self.flashButton];
     [self.view addSubview:self.frontButton];
@@ -101,8 +101,8 @@
     
     
     [self.frontButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (JZ_IPHONE_X) make.bottom.mas_equalTo(self.view.mas_top).mas_offset([JZSystemUtils obtainStatusHeight] + 60);
-        else make.bottom.mas_equalTo(self.view.mas_top).mas_offset([JZSystemUtils obtainStatusHeight] + 30);
+        if (ZL_IPHONE_X) make.bottom.mas_equalTo(self.view.mas_top).mas_offset([ZLSystemUtils obtainStatusHeight] + 60);
+        else make.bottom.mas_equalTo(self.view.mas_top).mas_offset([ZLSystemUtils obtainStatusHeight] + 30);
         make.right.mas_equalTo(self.view.mas_right).mas_offset(-20);
 //        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
@@ -115,7 +115,7 @@
 
     
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (JZ_IPHONE_X) make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-120);
+        if (ZL_IPHONE_X) make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-120);
         else make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-50);
         make.left.mas_equalTo(self.view.mas_left).mas_offset(([UIScreen mainScreen].bounds.size.width-107)/2/2-20);
         make.size.mas_equalTo(CGSizeMake(40, 40));
@@ -179,10 +179,10 @@
     }
 }
 - (void)savePhotoWithImageCompletion:(void (^)(void))completion failure:(void (^)(NSString *error))failure{
-    [JZAlertHUD showHUDTitle:@"保存中..." toView:self.view];
+    [ZLAlertHUD showHUDTitle:@"保存中..." toView:self.view];
     UIImage *image = [UIImage fixOrientation:self.cameraModel.cameraImage rotation:self.imageOrientation];
     [[ENPhotoLibraryManager manager] savePhotoWithImage:image completion:^(ENAssetModel *assetModel) {
-        [JZAlertHUD hideHUD:self.view];
+        [ZLAlertHUD hideHUD:self.view];
         if (completion) {
             completion();
         }
@@ -196,7 +196,7 @@
         if (failure) {
             failure(error);
         }
-        [JZAlertHUD hideHUD:self.view];
+        [ZLAlertHUD hideHUD:self.view];
 
     }];
 }
@@ -270,7 +270,7 @@
         self.currentRecordTime = 0.0f;
         self.progressView.progress = self.currentRecordTime;
         [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(onStartCountdown) object:nil];
-        [JZAlertHUD showTipTitle:@"录制时间过短"];
+        [ZLAlertHUD showTipTitle:@"录制时间过短"];
         return;
     }
     self.frontButton.hidden = YES;

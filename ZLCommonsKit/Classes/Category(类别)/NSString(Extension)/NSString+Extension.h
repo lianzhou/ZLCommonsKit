@@ -81,7 +81,7 @@
  @param key key
  @return 加密后的字符串
  */
-- (NSString *)JZAES_EncryptwithKey:(NSString *)key;
+- (NSString *)ZLAES_EncryptwithKey:(NSString *)key;
 
 /**
  AES解密
@@ -89,6 +89,30 @@
  @param key key
  @return 解密后的字符串
  */
-- (NSString *)JZAES_DecryptWithkey:(NSString *)key;
+- (NSString *)ZLAES_DecryptWithkey:(NSString *)key;
+
+
+
+/**
+生成uuid
+ @return NSString
+ */
++ (NSString *)getUUIDString;
+
+/**
+ *  去掉首尾空字符串
+ */
+- (NSString *)replaceSpaceOfHeadTail;
+- (NSString *)replaceUnicode;
+
+/**
+ 替换掉字符串中的空格
+ */
++(NSString*) stringReplacePlace:(NSString* )inputString;
+/**
+ 去除特殊字符
+ \"" @"<" @">" @"&" @"\n" @"\\n" @"\r\n" @"\t"
+ */
++(NSString*)RemoveSpecialCharacters:(NSString *)strString;
 
 @end

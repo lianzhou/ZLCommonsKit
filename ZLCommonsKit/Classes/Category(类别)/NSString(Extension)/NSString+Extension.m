@@ -7,8 +7,8 @@
 //
 
 #import "NSString+Extension.h"
-#import "JZStringMacrocDefine.h"
-#import "JZSystemMacrocDefine.h"
+#import "ZLStringMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
 #import "YYKit.h"
 #import "DTCoreText.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -35,7 +35,7 @@
 
 - (CGSize)textSizeIn:(CGSize)size font:(UIFont *)afont breakMode:(NSLineBreakMode)abreakMode align:(NSTextAlignment)alignment numberOfLines:(NSInteger)numberOfLines {
     
-    if (JZStringIsNull(self)) {
+    if (ZLStringIsNull(self)) {
         return CGSizeZero;
     }
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0){
@@ -52,7 +52,7 @@
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.lineBreakMode = breakMode;
         paragraphStyle.alignment = alignment;
-
+        
         
         if (numberOfLines != 0) {
             
@@ -85,8 +85,8 @@
                               DTDefaultStyleSheet:[[DTCSSStylesheet alloc] initWithStyleBlock:@"p,span,li, b { font-family: 'Helvetica Neue'; line-height: 18px; } b {} ul { padding-left: 14px; } em {font-style:'italic';}"]
                               };
     
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-//    [paragraphStyle setLineSpacing:6.0];
+    //    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    //    [paragraphStyle setLineSpacing:6.0];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithHTMLData:[self dataUsingEncoding:NSUnicodeStringEncoding] options:options documentAttributes:nil];
     [attrStr addAttributes:@{NSForegroundColorAttributeName:textColor} range:NSMakeRange(0, attrStr.length)];
     [attrStr setAlignment:NSTextAlignmentLeft];
@@ -148,11 +148,11 @@
         //找到标签中级的内容
         NSString *contentString = [[text componentsSeparatedByString:@"<p>"] lastObject];
         
-        if (!JZStringIsNull(contentString)) {
-             replaceString = [replaceString stringByReplacingOccurrencesOfString:html withString:contentString];
+        if (!ZLStringIsNull(contentString)) {
+            replaceString = [replaceString stringByReplacingOccurrencesOfString:html withString:contentString];
         }else {
             
-             replaceString = [replaceString stringByReplacingOccurrencesOfString:html withString:@""];
+            replaceString = [replaceString stringByReplacingOccurrencesOfString:html withString:@""];
         }
         
         NSLog(@"%@",replaceString);
@@ -200,10 +200,10 @@
         NSString *tempHeightHtml = nil;
         
         if ([tempHtml containsString:@"width: 100%;"]) {
-           tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"width: 100%;" withString:@""];
+            tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"width: 100%;" withString:@""];
         }
         if ([tempHtml containsString:@"height: 100%;"]) {
-          tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"height: 100%;" withString:@""];
+            tempHtml = [tempHtml stringByReplacingOccurrencesOfString:@"height: 100%;" withString:@""];
         }
         
         if ([tempHtml containsString:@"style"]) {
@@ -253,12 +253,12 @@
         }else {
             
             //这是不含有style样式 需要自己处理
-//            NSArray *tempStringArray = [tempHtml componentsSeparatedByString:@">"];
-//            NSLog(@"%@",tempStringArray);
-//
-//            NSString *styleString = [NSString stringWithFormat:@" style=\"max-width: %.2lfpx;\">",maxWidth];
-//            tempHtml = [[tempStringArray componentsJoinedByString:@""] stringByAppendingString:styleString];
-//            NSLog(@"%@",tempHtml);
+            //            NSArray *tempStringArray = [tempHtml componentsSeparatedByString:@">"];
+            //            NSLog(@"%@",tempStringArray);
+            //
+            //            NSString *styleString = [NSString stringWithFormat:@" style=\"max-width: %.2lfpx;\">",maxWidth];
+            //            tempHtml = [[tempStringArray componentsJoinedByString:@""] stringByAppendingString:styleString];
+            //            NSLog(@"%@",tempHtml);
         }
         
         NSLog(@"%@",tempHtml);
@@ -270,55 +270,55 @@
 }
 
 //将公式标签转成img标签
-    - (NSString *)formulaPicUrlFromFormulaText:(NSString *)formulaText {
+- (NSString *)formulaPicUrlFromFormulaText:(NSString *)formulaText {
+    
+    //新的string
+    NSString *formulaNewString = [NSString stringWithString:formulaText];
+    
+    //定义[LaTeXI]标签
+    NSString *latexiHtml = @"[LaTeXI]";
+    NSString *latexiLastHtml = @"[/LaTeXI]";
+    if (![formulaText containsString:latexiHtml]) {
         
-        //新的string
-        NSString *formulaNewString = [NSString stringWithString:formulaText];
-        
-        //定义[LaTeXI]标签
-        NSString *latexiHtml = @"[LaTeXI]";
-        NSString *latexiLastHtml = @"[/LaTeXI]";
-        if (![formulaText containsString:latexiHtml]) {
-            
-            //如果不包含[LaTeXI]标签直接return
-            return formulaText;
-        }
-        
-        //这是含有[LaTeXI]标签的
-        NSString *latexiText = nil;
-        
-        //这是包含 imgHtml标签的
-        NSScanner * scanner = [NSScanner scannerWithString:formulaText];
-        
-        while([scanner isAtEnd]==NO) {
-            
-            //找到标签的起始位置
-            [scanner scanUpToString:latexiHtml intoString:nil];
-            
-            //找到标签的结束位置
-            [scanner scanUpToString:latexiLastHtml intoString:&latexiText];
-            //替换字符
-            NSString *html = [NSString stringWithFormat:@"%@[/LaTeXI]",latexiText];
-            
-            //找到标签中级的内容
-            NSString *contentString = [[latexiText componentsSeparatedByString:latexiHtml] lastObject];
-            
-            
-            NSString *contextUrl = [FormulaUrl stringByAppendingString:contentString];
-            contextUrl = [contextUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            
-            
-            //拼接成图片标签的字符串
-            NSString *imgString = [NSString stringWithFormat:@"<img src=\"%@\">",contextUrl];
-            
-            formulaNewString = [formulaNewString stringByReplacingOccurrencesOfString:html withString:imgString];
-        }
-        return formulaNewString;
+        //如果不包含[LaTeXI]标签直接return
+        return formulaText;
     }
+    
+    //这是含有[LaTeXI]标签的
+    NSString *latexiText = nil;
+    
+    //这是包含 imgHtml标签的
+    NSScanner * scanner = [NSScanner scannerWithString:formulaText];
+    
+    while([scanner isAtEnd]==NO) {
+        
+        //找到标签的起始位置
+        [scanner scanUpToString:latexiHtml intoString:nil];
+        
+        //找到标签的结束位置
+        [scanner scanUpToString:latexiLastHtml intoString:&latexiText];
+        //替换字符
+        NSString *html = [NSString stringWithFormat:@"%@[/LaTeXI]",latexiText];
+        
+        //找到标签中级的内容
+        NSString *contentString = [[latexiText componentsSeparatedByString:latexiHtml] lastObject];
+        
+        
+        NSString *contextUrl = [FormulaUrl stringByAppendingString:contentString];
+        contextUrl = [contextUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        
+        //拼接成图片标签的字符串
+        NSString *imgString = [NSString stringWithFormat:@"<img src=\"%@\">",contextUrl];
+        
+        formulaNewString = [formulaNewString stringByReplacingOccurrencesOfString:html withString:imgString];
+    }
+    return formulaNewString;
+}
 
 + (NSDictionary *)jsonStringToNSDictionary:(NSString *)jsonString
 {
-    if (JZStringIsNull(jsonString)) {
+    if (ZLStringIsNull(jsonString)) {
         return @{};
     }
     NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
@@ -330,12 +330,12 @@
 }
 + (NSString *)initWithJsonDictionary:(NSDictionary *)jsonDic
 {
-    if (JZCheckObjectNull(jsonDic)) {
+    if (ZLCheckObjectNull(jsonDic)) {
         return @"";
     }
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDic options:kNilOptions error:nil];
     NSString *responseJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    if (JZStringIsNull(responseJson)) {
+    if (ZLStringIsNull(responseJson)) {
         return @"";
     }
     return responseJson;
@@ -343,16 +343,16 @@
 
 + (NSString *)obtainSixRandomNo{
     
-//    NSMutableArray <NSNumber *>* numberArray = [@[@0,@1,@2,@3,@4,@5,@6,@7,@8,@9] mutableCopy];
-//
-//    for (int i = 10; i > 1; i--) {
-//        int index = arc4random() % i;
-//        NSNumber * tmp = numberArray[index];
-//        numberArray[index] = numberArray[i - 1];
-//        numberArray[i - 1] = tmp;
-//    }
+    //    NSMutableArray <NSNumber *>* numberArray = [@[@0,@1,@2,@3,@4,@5,@6,@7,@8,@9] mutableCopy];
+    //
+    //    for (int i = 10; i > 1; i--) {
+    //        int index = arc4random() % i;
+    //        NSNumber * tmp = numberArray[index];
+    //        numberArray[index] = numberArray[i - 1];
+    //        numberArray[i - 1] = tmp;
+    //    }
     
-//    NSMutableArray *numberArray = [NSMutableArray array];
+    //    NSMutableArray *numberArray = [NSMutableArray array];
     NSString *randStr = nil;
     for (int i = 0; i < 6; i++) {
         int result = arc4random_uniform(10);
@@ -361,21 +361,21 @@
         }else{
             randStr = [NSString stringWithFormat:@"%@%d",randStr,result];
         }
-//        [numberArray addObject:[NSString stringWithFormat:@"%d",result]];
+        //        [numberArray addObject:[NSString stringWithFormat:@"%d",result]];
     }
-
+    
     return randStr;
-//    long long result = arc4random();
-//    if (result >= 100000) {
-//        NSString *resultStr = [NSString stringWithFormat:@"%lld",result];
-//        resultStr = [resultStr substringWithRange:NSMakeRange(0, 6)];
-//        return resultStr;
-//    }else{
-//      return [NSString stringWithFormat:@"%06lld",result];
-//    }
-//    for(int i = 0; i < 6; i++){
-//        result = result * 10 + [[numberArray objectAtIndex:i] intValue];
-//    }
+    //    long long result = arc4random();
+    //    if (result >= 100000) {
+    //        NSString *resultStr = [NSString stringWithFormat:@"%lld",result];
+    //        resultStr = [resultStr substringWithRange:NSMakeRange(0, 6)];
+    //        return resultStr;
+    //    }else{
+    //      return [NSString stringWithFormat:@"%06lld",result];
+    //    }
+    //    for(int i = 0; i < 6; i++){
+    //        result = result * 10 + [[numberArray objectAtIndex:i] intValue];
+    //    }
     
     
 }
@@ -389,7 +389,7 @@
     
 }
 
-- (NSString*)JZAES_EncryptwithKey:(NSString *)key{
+- (NSString*)ZLAES_EncryptwithKey:(NSString *)key{
     
     NSData *data = [self dataUsingEncoding:NSUTF8StringEncoding];
     NSData *AESData = [self AES128operation:kCCEncrypt
@@ -400,7 +400,7 @@
     return baseStr;
 }
 
-- (NSString*)JZAES_DecryptWithkey:(NSString *)key{
+- (NSString*)ZLAES_DecryptWithkey:(NSString *)key{
     
     NSData *baseData = [[NSData alloc]initWithBase64EncodedString:self options:0];
     
@@ -452,5 +452,74 @@
     free(buffer);
     return nil;
 }
+/**
+ *  去掉首尾空字符串
+ */
+- (NSString *)replaceSpaceOfHeadTail
+{
+    NSMutableString *string = [[NSMutableString alloc] init];
+    [string setString:self];
+    CFStringTrimWhitespace((CFMutableStringRef)string);
+    return string;
+}
 
+- (NSString *)replaceUnicode
+{
+    NSStringEncoding strEncode = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_2312_80);
+    NSString *tempStr1 = [self stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"];
+    NSString *tempStr2 = [tempStr1 stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    NSString *tempStr3 = [[@"\""stringByAppendingString:tempStr2] stringByAppendingString:@"\""];
+    NSData *tempData = [tempStr3 dataUsingEncoding:strEncode];
+    NSString* returnStr = [NSPropertyListSerialization propertyListFromData:tempData
+                                                           mutabilityOption:NSPropertyListImmutable
+                                                                     format:NULL
+                                                           errorDescription:NULL];
+    return [returnStr stringByReplacingOccurrencesOfString:@"\\r\\n"withString:@"\n"];
+    
+}
+
+
+#pragma mark  生成uuid
++ (NSString *)getUUIDString
+{
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
+    CFRelease(uuid);
+    return uuidString;
+}
+
+
+/**
+ 替换掉字符串中的空格
+ 
+ @param inputString <#inputString description#>
+ 
+ @return <#return value description#>
+ */
++(NSString*) stringReplacePlace:(NSString* )inputString
+{
+    inputString = [inputString stringByTrimmingCharactersInSet:
+                   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    inputString=[inputString stringByReplacingOccurrencesOfString:@" " withString:@""];//两个中英文不同的空格
+    inputString=[inputString stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return inputString;
+}
+
+#pragma mark去除特殊字符
++(NSString*)RemoveSpecialCharacters:(NSString *)strString
+{
+    strString=[self stringReplacePlace:strString];
+    strString=[strString stringByReplacingOccurrencesOfString:@"'" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@"<" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@">" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@"&" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    strString=[strString stringByReplacingOccurrencesOfString:@"\\n" withString:@""];
+    strString = [strString stringByReplacingOccurrencesOfString:@"\r\n" withString:@""];
+    strString = [strString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
+    
+    return strString;
+}
 @end

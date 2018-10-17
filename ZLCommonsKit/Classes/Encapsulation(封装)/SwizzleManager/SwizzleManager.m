@@ -7,9 +7,9 @@
 //
 
 #import "SwizzleManager.h"
-#import "JZBaseViewController.h"
+#import "ZLBaseViewController.h"
 #import "Aspects.h"
-#import "JZContext.h"
+#import "ZLContext.h"
 #import <objc/runtime.h>
 
 @implementation SwizzleManager
@@ -19,17 +19,17 @@
     /**
      *  获取当前currentViewController
      */
-    [JZBaseViewController aspect_hookSelector:@selector(viewWillAppear:)
+    [ZLBaseViewController aspect_hookSelector:@selector(viewWillAppear:)
                               withOptions:AspectPositionBefore 
                                usingBlock:^(id<AspectInfo> info){
                                    
-                                   if ([[info.instance class] isSubclassOfClass:[JZBaseViewController class]]) {
+                                   if ([[info.instance class] isSubclassOfClass:[ZLBaseViewController class]]) {
                                        NSLog(@"\n进入界面:[%@ viewWillAppear]\n",[info.instance class]);
 
                                     NSString *  instanceString =  NSStringFromClass([info.instance class]);
-                                       if (![instanceString isEqualToString:@"JZJZShareSearchViewController"] && ![instanceString isEqualToString:@"JZAlertViewController"]  && ![instanceString isEqualToString:@"JZIntegralDeductionRuleOrSelectPayTypeViewController"]) {
-                                           JZBaseViewController* currentViewController = (JZBaseViewController *)info.instance;
-                                           [JZContext shareInstance].currentViewController = currentViewController;
+                                       if (![instanceString isEqualToString:@"ZLZLShareSearchViewController"] && ![instanceString isEqualToString:@"ZLAlertViewController"]  && ![instanceString isEqualToString:@"ZLIntegralDeductionRuleOrSelectPayTypeViewController"]) {
+                                           ZLBaseViewController* currentViewController = (ZLBaseViewController *)info.instance;
+                                           [ZLContext shareInstance].currentViewController = currentViewController;
                                        }                                       
                                    }
                                }error:NULL];
@@ -40,13 +40,13 @@
                               withOptions:AspectPositionBefore 
                                usingBlock:^(id<AspectInfo> info){
                                    
-                                   if ([[info.instance class] isSubclassOfClass:[JZBaseViewController class]]) {
+                                   if ([[info.instance class] isSubclassOfClass:[ZLBaseViewController class]]) {
                                        NSLog(@"\n进入界面:[%@ viewDidLoad]\n",[info.instance class]);
 
                                        NSString *  instanceString =  NSStringFromClass([info.instance class]);
-                                       if (![instanceString isEqualToString:@"JZJZShareSearchViewController"] && ![instanceString isEqualToString:@"JZAlertViewController"] && ![instanceString isEqualToString:@"JZIntegralDeductionRuleOrSelectPayTypeViewController"]) {
-                                           JZBaseViewController* currentViewController = (JZBaseViewController *)info.instance;
-                                           [JZContext shareInstance].currentViewController = currentViewController;                         
+                                       if (![instanceString isEqualToString:@"ZLZLShareSearchViewController"] && ![instanceString isEqualToString:@"ZLAlertViewController"] && ![instanceString isEqualToString:@"ZLIntegralDeductionRuleOrSelectPayTypeViewController"]) {
+                                           ZLBaseViewController* currentViewController = (ZLBaseViewController *)info.instance;
+                                           [ZLContext shareInstance].currentViewController = currentViewController;
                                        }                                       
                                        
                                    }
@@ -59,7 +59,7 @@
                               withOptions:AspectPositionBefore 
                                usingBlock:^(id<AspectInfo> info){
                                    
-                                   if ([[info.instance class] isSubclassOfClass:[JZBaseViewController class]]) {
+                                   if ([[info.instance class] isSubclassOfClass:[ZLBaseViewController class]]) {
                                        NSLog(@"\n页面释放:[%@ dealloc]\n",[info.instance class]);
                                    }
                                }error:NULL];
@@ -67,7 +67,7 @@
     [UIViewController aspect_hookSelector:@selector(didReceiveMemoryWarning)
                               withOptions:AspectPositionBefore
                                usingBlock:^(id<AspectInfo> info){
-                                   if ([[info.instance class] isSubclassOfClass:[JZBaseViewController class]]) {
+                                   if ([[info.instance class] isSubclassOfClass:[ZLBaseViewController class]]) {
                                        NSLog(@"-------->内存溢出<---------内存溢出的:[%@ didReceiveMemoryWarning]<--------",[info.instance class]);
                                    }
                                }error:NULL];

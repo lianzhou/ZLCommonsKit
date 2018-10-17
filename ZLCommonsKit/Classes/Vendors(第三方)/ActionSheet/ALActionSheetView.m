@@ -7,8 +7,8 @@
 //
 
 #import "ALActionSheetView.h"
-#import "JZStringMacrocDefine.h"
-#import "JZSystemMacrocDefine.h"
+#import "ZLStringMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
 
 #define kRowHeight 48.0f
 #define kRowLineHeight 0.5f
@@ -145,7 +145,7 @@
             
             offy += kRowHeight;
         }
-        if (!JZStringIsNull(_cancelButtonTitle)) {
+        if (!ZLStringIsNull(_cancelButtonTitle)) {
             UIView *separatorView = [[UIView alloc] initWithFrame:CGRectMake(0, offy, width, kSeparatorHeight)];
             separatorView.backgroundColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
             [_actionSheetView addSubview:separatorView];
@@ -169,7 +169,7 @@
         }
         _actionSheetHeight = offy; 
        
-        if(JZ_IPHONE_X){
+        if(ZL_IPHONE_X){
             _actionSheetHeight +=34.0f;
         }
         

@@ -27,7 +27,7 @@
 
 #import "HPTextViewInternal.h"
 
-#define kDefaultJZFont(A) [UIFont systemFontOfSize:(A)]
+#define kDefaultZLFont(A) [UIFont systemFontOfSize:(A)]
 @implementation HPTextViewInternal
 
 -(void)setText:(NSString *)text
@@ -109,11 +109,11 @@
         {
             NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
             paragraphStyle.alignment = self.textAlignment;
-//            self.font = kDefaultJZFont(16.0);
+//            self.font = kDefaultZLFont(16.0);
             [self.placeholder drawInRect:CGRectMake(10, 8 + self.contentInset.top, self.frame.size.width-self.contentInset.left, self.frame.size.height- self.contentInset.top) withAttributes:@{NSFontAttributeName:self.font, NSForegroundColorAttributeName:self.placeholderColor, NSParagraphStyleAttributeName:paragraphStyle}];
         }
         else {
-//            self.font = kDefaultJZFont(15.0);
+//            self.font = kDefaultZLFont(15.0);
             [self.placeholderColor set];
             [self.placeholder drawInRect:CGRectMake(8.0f, 8.0f, self.frame.size.width - 16.0f, self.frame.size.height - 16.0f) withFont:self.font];
         }

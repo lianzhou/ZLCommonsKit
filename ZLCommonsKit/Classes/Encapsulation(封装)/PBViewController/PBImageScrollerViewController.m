@@ -7,7 +7,7 @@
 #import "PBImageScrollView+internal.h"
 #import <Masonry/Masonry.h>
 #import "UIImage+Picker.h"
-#import "NSBundle+JZCommonsKit.h"
+#import "NSBundle+ZLCommonsKit.h"
 #import "UIImage+YYAdd.h"
 #import <MediaPlayer/MediaPlayer.h>
 

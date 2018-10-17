@@ -7,8 +7,8 @@
 
 #import "UITableViewCell+LineImageView.h"
 #import <objc/runtime.h>
-#import "UIImage+JZTintColor.h"
-#import "JZSystemMacrocDefine.h"
+#import "UIImage+ZLTintColor.h"
+#import "ZLSystemMacrocDefine.h"
 
 static const void *kTopLineViewObjectKey;
 static const void *kBottomLineObjectKey;

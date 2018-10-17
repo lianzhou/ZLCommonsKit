@@ -7,7 +7,7 @@
 //
 
 #import "AYBubbleView.h"
-#import "JZSystemMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
 @interface AYBubbleView () {
     //    圆A切点
     CGPoint point_A;
@@ -74,7 +74,7 @@
     self.unReadLabel = [[UILabel alloc] initWithFrame:self.frontView.bounds];
     self.unReadLabel.textAlignment = NSTextAlignmentCenter;
     self.unReadLabel.textColor = [UIColor whiteColor];
-    if (JZ_IOS8) {
+    if (ZL_IOS8) {
          self.unReadLabel.font = [UIFont systemFontOfSize:11 weight:0.05];
     }else {
         self.unReadLabel.font = [UIFont systemFontOfSize:11];

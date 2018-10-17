@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
-#import "UITextView+JZDeleteBackward.h"
-#import "UITextField+JZDeleteBackward.h"
+#import "UITextView+ZLDeleteBackward.h"
+#import "UITextField+ZLDeleteBackward.h"
 
 
-@interface UITextField (JZTextField)
+@interface UITextField (ZLTextField)
 
 @property(nonatomic,strong) NSNumber * textField_isMore;
 @property(nonatomic,strong) NSString * textField_tempText;
@@ -20,7 +20,7 @@
 
 @end
 
-@interface UITextView (JZTextView)
+@interface UITextView (ZLTextView)
 
 @property(nonatomic,strong) NSNumber * textView_isMore;
 @property(nonatomic,strong) NSString * textView_tempText;

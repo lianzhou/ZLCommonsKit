@@ -1,6 +1,6 @@
 //
 //  ENPhoto.h
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/8.
 //  Copyright © 2017年 李长恩. All rights reserved.

@@ -1,22 +1,22 @@
 //
 //  ENImagePickerController.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/1.
 //  Copyright © 2017年 李长恩. All rights reserved.
 //
 
 #import "ENImagePickerController.h"
-#import "JZDropDownListView.h"
-#import "JZDropDownItem.h"
+#import "ZLDropDownListView.h"
+#import "ZLDropDownItem.h"
 #import "ENPhotoLibraryManager.h"
 #import "ENTitleView.h"
 #import "PBViewController.h"
-#import "JZAlertHUD.h"
-#import "JZSystemMacrocDefine.h"
-#import "UIScrollView+JZEmptyDataSet.h"
+#import "ZLAlertHUD.h"
+#import "ZLSystemMacrocDefine.h"
+#import "UIScrollView+ZLEmptyDataSet.h"
 #import <TOCropViewController/TOCropViewController.h>
-#import "JZStringMacrocDefine.h"
+#import "ZLStringMacrocDefine.h"
 static CGFloat itemPickerMargin = 5;
 static CGFloat imagePickerBarMargin = 45.0f;
 
@@ -28,7 +28,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
 @property(nonatomic,strong) UIBarButtonItem * rightBarButtonItem;
 @property(nonatomic,strong) ENTitleView * enTitleView;
 
-@property(nonatomic,strong) JZDropDownListView * dropDownListView;
+@property(nonatomic,strong) ZLDropDownListView * dropDownListView;
 
 //当前相册查看的大图
 @property (nonatomic, strong) NSMutableDictionary<NSNumber * , ENPhoto *> * visiblePhotos;
@@ -119,17 +119,17 @@ static CGFloat imagePickerBarMargin = 45.0f;
     [self.view addSubview:self.pickerCollectionView];
     [self.view addSubview:self.previewButton];
     [self makeConstraints];
-    [JZSystemUtils assetsAuthorizationStatusAuthorized:^{
+    [ZLSystemUtils assetsAuthorizationStatusAuthorized:^{
         [[ENPhotoLibraryManager manager] getAllAlbums:weakSelf.allowPickingVideo allowPickingImage:self.allowPickingImage completion:^(NSArray<ENAlbumModel *> *albumModels) {
             [weakSelf createNavigationItemTitleView:albumModels];
         }];
     } restricted:^{
         
-        [weakSelf.pickerCollectionView setupEmptyDataText:@"此应用程序没有权限访问您的照片或视频" subText:[NSString stringWithFormat:@"请在iPhone的\"设置-隐私-照片\"选项中，\r允许\"%@\"访问你的手机相册",[JZSystemUtils getTheAppName]] emptyImage:nil];
-        if(JZ_IOS8) {
+        [weakSelf.pickerCollectionView setupEmptyDataText:@"此应用程序没有权限访问您的照片或视频" subText:[NSString stringWithFormat:@"请在iPhone的\"设置-隐私-照片\"选项中，\r允许\"%@\"访问你的手机相册",[ZLSystemUtils getTheAppName]] emptyImage:nil];
+        if(ZL_IOS8) {
             [weakSelf.pickerCollectionView setupEmptyButtonText:@"跳转设置" emptyButtonImage:nil tapBlock:^{
                 NSLog(@"跳转");
-                [JZSystemUtils openSystemSetting];
+                [ZLSystemUtils openSystemSetting];
             }];
         }
         
@@ -164,7 +164,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
     self.visiblePhotos = photoDicM;
     WEAKSELF
     for (ENAlbumModel * albumModel in models) {
-        JZDropDownItem * item1 = [JZDropDownItem downItemWithTitle:albumModel.name withSelectedBlock:^(NSUInteger idex, JZDropDownItem * info) {
+        ZLDropDownItem * item1 = [ZLDropDownItem downItemWithTitle:albumModel.name withSelectedBlock:^(NSUInteger idex, ZLDropDownItem * info) {
             if (![weakSelf.visibleAllPhotos.allKeys containsObject:[NSNumber numberWithInteger:idex]]) {
                 NSMutableDictionary * photoDicM = [@{} mutableCopy];
                 [weakSelf.visibleAllPhotos setObject:photoDicM forKey:[NSNumber numberWithInteger:idex]];
@@ -175,19 +175,19 @@ static CGFloat imagePickerBarMargin = 45.0f;
             weakSelf.enTitleView.attributedTitle = info.title;
             [weakSelf changeAlbumModel:albumModel];
         }];
-        item1.info.cellName = @"JZImageDropDownCell";
-        item1.info.cellIdentifier = @"JZImageDropDownCell";
+        item1.info.cellName = @"ZLImageDropDownCell";
+        item1.info.cellIdentifier = @"ZLImageDropDownCell";
         item1.customData = albumModel;
         [titleArrayM addObject:item1];
     }
     
-    JZDropDownConfig * dropDownConfig = [[JZDropDownConfig alloc]init];
+    ZLDropDownConfig * dropDownConfig = [[ZLDropDownConfig alloc]init];
     dropDownConfig.isShowArrow = NO;
     dropDownConfig.dropDownItems = titleArrayM;
     dropDownConfig.dropDownViewWidth = [UIScreen mainScreen].bounds.size.width;
     dropDownConfig.dropDownViewLeft = [UIScreen mainScreen].bounds.size.width/2;
-    self.dropDownListView = [[JZDropDownListView alloc]initWithConfig:dropDownConfig];
-    [self.dropDownListView presentPointingAtView:self.enTitleView inView:self.view dropDownListViewShowType:JZDropDownListViewShowTypeCenter];
+    self.dropDownListView = [[ZLDropDownListView alloc]initWithConfig:dropDownConfig];
+    [self.dropDownListView presentPointingAtView:self.enTitleView inView:self.view dropDownListViewShowType:ZLDropDownListViewShowTypeCenter];
     
 }
 - (void)changeAlbumModel:(ENAlbumModel *)albumModel{
@@ -249,7 +249,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
         [infoArr addObject:@1];
     }
     self.rightBarButtonItem.enabled = NO;
-    //    [JZAlertHUD hudShowMessage:@"加载中..." toView:self.view];
+    //    [ZLAlertHUD hudShowMessage:@"加载中..." toView:self.view];
     //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -324,7 +324,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
     }
     
     if (model.type == ENAssetModelMediaTypeVideo) {
-        [JZAlertHUD showHUDTitle:@"正在压缩..." toView:self.view];
+        [ZLAlertHUD showHUDTitle:@"正在压缩..." toView:self.view];
         WEAKSELF
         [[ENPhotoLibraryManager manager] getVideoOutputPathWithAsset:model.asset completion:^(NSString *outputPath) {
             ENCameraModel * assetVideoModel = [[ENCameraModel alloc] init];
@@ -337,7 +337,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
             [outputSettings setObject:[NSNumber numberWithFloat:model.pixelWidth] forKey:AVVideoWidthKey];
             assetVideoModel.outputSettings = outputSettings;
             
-            [JZAlertHUD hideHUD:weakSelf.view];
+            [ZLAlertHUD hideHUD:weakSelf.view];
             if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(imagePickerController:didFinishVideoModel:)]) {
                 [weakSelf.delegate imagePickerController:weakSelf didFinishVideoModel:assetVideoModel];
             }
@@ -598,9 +598,9 @@ static CGFloat imagePickerBarMargin = 45.0f;
                 [[PHImageManager defaultManager] requestImageDataForAsset:assetModel.asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                     float imageSize = imageData.length; //convert to MB
                     imageSize = imageSize/(1024*1024.0);
-                    JZLog(@"选择图片大小：%f",imageSize);
+                    ZLLog(@"选择图片大小：%f",imageSize);
                     if(imageSize>10){
-                        [JZAlertHUD showTipTitle:@"不能选择大于10M的图片"];
+                        [ZLAlertHUD showTipTitle:@"不能选择大于10M的图片"];
                     }
                     else
                     {
@@ -610,7 +610,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
                             }
                         } failure:^(NSString *error) {
                             NSLog(@"%@",error);
-                            [JZAlertHUD showTipTitle:error];
+                            [ZLAlertHUD showTipTitle:error];
                         }];
                     }
                 }];
@@ -625,7 +625,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
             }
         } failure:^(NSString *error) {
             NSLog(@"%@",error);
-            [JZAlertHUD showTipTitle:error];
+            [ZLAlertHUD showTipTitle:error];
         }];
     }
     

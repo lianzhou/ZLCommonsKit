@@ -11,7 +11,7 @@
 #import "TAPageControl.h"
 #import "UIImageView+WebCache.h" 
 #import "SDImageCache.h"
-#import "JZSystemMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
 #import "UIView+MJExtension.h"
 
 #define kCycleScrollViewInitialPageControlDotSize CGSizeMake(10, 10)

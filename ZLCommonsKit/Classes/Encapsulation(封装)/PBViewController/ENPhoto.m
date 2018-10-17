@@ -1,6 +1,6 @@
 //
 //  ENPhoto.m
-//  JZImagePickerController
+//  ZLImagePickerController
 //
 //  Created by li_chang_en on 2017/11/8.
 //  Copyright © 2017年 李长恩. All rights reserved.
@@ -191,9 +191,9 @@
 - (void)_performLoadUnderlyingImageAndNotifyWithWebURL:(NSURL *)url {
     
     NSString *imageUrl = url.absoluteString;
-    if ([imageUrl hasPrefix:@"http://dfs.img.jzexueyun.com/"]) {
+    if ([imageUrl hasPrefix:@"http://dfs.img.ZLexueyun.com/"]) {
         imageUrl = [NSString stringWithFormat:@"%@%@",imageUrl,@"?imageView2/2/w/1080/h/1920"];
-        imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"dfs.img.jzexueyun.com/" withString:@"dfs.view-img.jzexueyun.com/"];
+        imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"dfs.img.ZLexueyun.com/" withString:@"dfs.view-img.ZLexueyun.com/"];
     }else if ([imageUrl hasPrefix:@"http://test.img.juziwl.cn/"]){
         imageUrl = [NSString stringWithFormat:@"%@%@",imageUrl,@"?imageView2/2/w/1080/h/1920"];
         imageUrl = [imageUrl stringByReplacingOccurrencesOfString:@"test.img.juziwl.cn/" withString:@"test.view-img.juziwl.cn/"];

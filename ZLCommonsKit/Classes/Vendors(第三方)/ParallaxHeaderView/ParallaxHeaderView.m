@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FXBlurView.h"
 #import "ParallaxHeaderView.h"
-#import "JZSystemMacrocDefine.h"
+#import "ZLSystemMacrocDefine.h"
 
 @interface ParallaxHeaderView ()
 
@@ -261,7 +261,7 @@ static CGFloat kLabelPaddingDist = 8.0f;
     [self.imageScrollView addSubview:subView];
     
     if (isBlur) {
-        if (JZ_IOS7) {
+        if (ZL_IOS7) {
             UIBlurEffect *blure = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
             UIVisualEffectView *effectView = [[UIVisualEffectView alloc]initWithEffect:blure];
             effectView.frame = self.frame;
