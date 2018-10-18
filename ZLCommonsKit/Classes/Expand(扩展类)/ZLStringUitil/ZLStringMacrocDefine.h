@@ -206,6 +206,8 @@
 //递归计算符合规定的文本长度
 #define ZLStringCutBeyondTextInLength(object,string1) [ZLStringUitil cutBeyondTextInLength:object string:string1]
 
-
-
+/**
+ *  拼接字符串
+ */
+#define ZLStringFormat(format,...) [NSString stringWithFormat:format,##__VA_ARGS__]
 #endif /* ZLStringMacrocDefine_h */

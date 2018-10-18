@@ -598,7 +598,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
                 [[PHImageManager defaultManager] requestImageDataForAsset:assetModel.asset options:nil resultHandler:^(NSData * _Nullable imageData, NSString * _Nullable dataUTI, UIImageOrientation orientation, NSDictionary * _Nullable info) {
                     float imageSize = imageData.length; //convert to MB
                     imageSize = imageSize/(1024*1024.0);
-                    ZLLog(@"选择图片大小：%f",imageSize);
+                    ZL_LOG(@"选择图片大小：%f",imageSize);
                     if(imageSize>10){
                         [ZLAlertHUD showTipTitle:@"不能选择大于10M的图片"];
                     }
@@ -609,7 +609,7 @@ static CGFloat imagePickerBarMargin = 45.0f;
                                 selectImageCount(index);
                             }
                         } failure:^(NSString *error) {
-                            NSLog(@"%@",error);
+                            ZL_LOG(@"%@",error);
                             [ZLAlertHUD showTipTitle:error];
                         }];
                     }
