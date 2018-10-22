@@ -97,6 +97,35 @@ _ ## className = [[className alloc] init]; \
 return _ ## className; \
 }
 
+
+
+//获取系统对象
+#define ZL_Application           [UIApplication sharedApplication]
+#define ZL_KeyWindow             [UIApplication sharedApplication].keyWindow
+#define ZL_AppWindow             [UIApplication sharedApplication].delegate.window
+//#define ZLAppDelegate           [UIApplication sharedApplication].delegate
+
+#define ZL_AppDelegate            [AppDelegate shareAppDelegate]
+
+#define ZL_AppVersion            [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+
+#define ZL_UserDefaults       [NSUserDefaults standardUserDefaults]
+
+#define ZL_NotificationCenter    [NSNotificationCenter defaultCenter]
+
+//发送通知
+#define ZL_PostNotification(name,obj) [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj];
+
+
+#define ZL_TempPath              NSTemporaryDirectory()
+#define ZL_DocumentPath          [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]
+#define ZL_CachePath             [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+#define ZLRootViewController [UIApplication sharedApplication].delegate.window.rootViewController
+
+
+
+
 //-------------------打印日志-------------------------
 
 //DEBUG  模式下打印日志,当前行
