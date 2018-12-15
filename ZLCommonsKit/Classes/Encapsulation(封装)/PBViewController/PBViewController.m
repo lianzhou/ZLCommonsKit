@@ -302,7 +302,7 @@ static const NSUInteger reusable_page_count = 3;
         }else if(photo.photoURL){
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
             [manager downloadImageWithURL:photo.photoURL options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                
+
             } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                 [photoLibraryManager savePhotoWithImage:image completion:^(ENAssetModel *assetModel) {
                     [ZLAlertHUD showTipTitle:@"保存成功"];
@@ -310,6 +310,17 @@ static const NSUInteger reusable_page_count = 3;
                     [ZLAlertHUD showTipTitle:error];
                 }];
             }];
+            
+//            [manager loadImageWithURL:photo.photoURL options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+//
+//            } completed:^(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL) {
+//                [photoLibraryManager savePhotoWithImage:image completion:^(ENAssetModel *assetModel) {
+//                    [ZLAlertHUD showTipTitle:@"保存成功"];
+//                } failure:^(NSString *error) {
+//                    [ZLAlertHUD showTipTitle:error];
+//                }];
+//            }];
+            
         }
         
         

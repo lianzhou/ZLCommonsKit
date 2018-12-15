@@ -38,20 +38,20 @@ s.resource_bundles = {
 'ZLPlaceholderExp' => ['ZLCommonsKit/Assets/ZLPlaceholderExp/**/*']
 }
 
-# s.public_header_files = 'Pod/Classes/**/*.h'
+# s.public_header_files = 'Pod/Classes/**/*.h', '~> 3.0.4'
 s.frameworks = 'UIKit','Foundation'
-s.dependency  'AFNetworking', '~> 3.0.4'
-s.dependency  'SDWebImage', '~> 3.7.6'
-s.dependency  'FMDB', '~> 2.7.2'
-s.dependency  'DZNEmptyDataSet', '~> 1.7.3'
-s.dependency  'YYKit', '~> 1.0.9'
-s.dependency  'Masonry', '~> 0.6.4'
+s.dependency  'AFNetworking'
+s.dependency  'SDWebImage', '~> 3.8.2'
+s.dependency  'FMDB'
+s.dependency  'DZNEmptyDataSet'
+s.dependency  'YYKit'
+s.dependency  'Masonry'
 s.dependency  'MBProgressHUD'
-s.dependency  'IQKeyboardManager', '~> 3.3.7'
-s.dependency  'MJExtension', '~> 3.0.10'
-s.dependency  'MJRefresh', '~> 3.1.0'
+s.dependency  'IQKeyboardManager'
+s.dependency  'MJExtension'
+s.dependency  'MJRefresh'
 #ENImagePickerController 需要
-s.dependency  'GPUImage', '~> 0.1.7'
+s.dependency  'GPUImage'
 s.dependency  'TOCropViewController'
 
 s.dependency 'DTCoreText'

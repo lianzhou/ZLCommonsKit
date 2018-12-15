@@ -15,7 +15,7 @@
 #import "ZLContext.h"
 #import "ZLNetWorkTaskProtocol.h"
 #import "NSString+Extension.h"
-#import "KeychainItemWrapper.h"
+
 #import <AdSupport/AdSupport.h>
 #import "ZLSystemUtils.h"
 @interface ZLNetWorkManager()
@@ -63,18 +63,18 @@
 //            [_manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [_manager.requestSerializer setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
             
-            NSString *wrapperKey = [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleIdentifierKey];
-            KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:wrapperKey accessGroup:nil];
-            NSString *appIdentifier = [NSString stringWithFormat:@"%@",[wrapper objectForKey:(id)kSecValueData]];
-            if (ZLStringIsNull(appIdentifier)) {
-                appIdentifier = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-                [wrapper setObject:@"eStudyParentTeacher" forKey:(id)kSecAttrService];
-                [wrapper setObject:@"eStudyParentTeacher" forKey:(id)kSecAttrAccount];
-                [wrapper setObject:appIdentifier forKey:(id)kSecValueData];
-                [wrapper setObject:(id)kSecAttrAccessibleAlwaysThisDeviceOnly forKey:(id)kSecAttrAccessible];
-            }
-            NSString *requestTagString = [NSString stringWithFormat:@"%@/%@",[ZLSystemUtils deviceString],appIdentifier];
-            [_manager.requestSerializer setValue:requestTagString forHTTPHeaderField:@"TAG"];
+        //    NSString *wrapperKey = [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleIdentifierKey];
+//            KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:wrapperKey accessGroup:nil];
+//            NSString *appIdentifier = [NSString stringWithFormat:@"%@",[wrapper objectForKey:(id)kSecValueData]];
+//            if (ZLStringIsNull(appIdentifier)) {
+//                appIdentifier = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
+//                [wrapper setObject:@"eStudyParentTeacher" forKey:(id)kSecAttrService];
+//                [wrapper setObject:@"eStudyParentTeacher" forKey:(id)kSecAttrAccount];
+//                [wrapper setObject:appIdentifier forKey:(id)kSecValueData];
+//                [wrapper setObject:(id)kSecAttrAccessibleAlwaysThisDeviceOnly forKey:(id)kSecAttrAccessible];
+//            }
+       //     NSString *requestTagString = [NSString stringWithFormat:@"%@",[ZLSystemUtils deviceString]];
+          //  [_manager.requestSerializer setValue:requestTagString forHTTPHeaderField:@"TAG"];
             
         } else {
              [_manager.requestSerializer setValue:@"text/xml" forHTTPHeaderField:@"Content-Type"];
